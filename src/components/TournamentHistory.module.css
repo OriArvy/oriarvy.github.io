@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.matchup {
+  background-image: linear-gradient(#000, #000), linear-gradient(90deg, #fd4715, #f9b241);
+  border: 0.25em solid transparent;
+  background-clip: padding-box, border-box;
+  border-radius: 1.8em;
+  background-origin: border-box;
+  margin-bottom: 20px;
+  padding: 0px 10px;
+}
+
+.roundContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-right: 30px
+}
