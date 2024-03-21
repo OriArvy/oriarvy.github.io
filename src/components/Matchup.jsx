@@ -37,4 +37,3 @@ const Matchup = ({ teams, onWinnerSelect }) => {
 };
 
 export default Matchup;
-

@@ -4,7 +4,6 @@ import SearchUserPlaylistLayout from './pages/SearchUserPlaylist';
 import Bracket from './pages/Bracket';
 import RootLayout from './pages/Root';
 import ErrorPage from './pages/Error';
-import { PlaylistTracksProvider } from './PlaylistTracksContext';
 import { loadPlaylistDetails } from './pages/PlaylistSettingsPage';
 import PlaylistSettingsPage from './pages/PlaylistSettingsPage';
 import PremadePlaylistsPage from './pages/PremadePlaylists';
@@ -43,9 +42,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <PlaylistTracksProvider>
       <RouterProvider router={router} />
-    </PlaylistTracksProvider>
   )
 };
 
