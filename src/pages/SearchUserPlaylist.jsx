@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Suspense } from 'react';
 import useSpotifyAccessToken from '../hooks/useSpotifyAcessToken';
 import PlaylistItem from '../components/PlaylistItem';
@@ -11,11 +11,21 @@ const SearchPage = () => {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   const [error, setError] = useState(null);
+  const [search, setSearch] = useSearchParams()
+
+  useEffect(() => {
+    const storedPlaylists = localStorage.getItem('playlists');
+    if (storedPlaylists) {
+      setUserPlaylists(JSON.parse(storedPlaylists));
+    }
+  }, []);
 
   const handleSearch = async (searchTerm) => {
     setError(null)
     setUserPlaylists([])
     setSelectedPlaylist('')
+    setSearch('')
+    localStorage.removeItem('playlists')
 
     if (!accessToken) {
       console.error('Spotify access token is not available');
@@ -34,6 +44,9 @@ const SearchPage = () => {
         throw new Error('Failed to fetch user playlists');
       }
 
+      search.set('query', searchTerm)
+      setSearch(search, { replace: true})
+
       const data = await response.json();
 
       if (data.items.length === 0) {
@@ -41,6 +54,7 @@ const SearchPage = () => {
       }
 
       setUserPlaylists(data.items);
+      localStorage.setItem('playlists', JSON.stringify(data.items))
       setSelectedPlaylist('');
     } catch (error) {
       setError(error.message);
