@@ -1,18 +1,19 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom';
 import HomePage from './pages/Home';
 import SearchUserPlaylistLayout from './pages/SearchUserPlaylist';
 import Bracket from './pages/Bracket';
-import RootLayout from './pages/Root';
+import RootLayoutWithListener from './pages/RootLayoutWithListener';
 import ErrorPage from './pages/Error';
 import { loadPlaylistDetails } from './pages/PlaylistSettingsPage';
 import PlaylistSettingsPage from './pages/PlaylistSettingsPage';
 import PremadePlaylistsPage from './pages/PremadePlaylists';
+import { useEffect } from 'react';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <RootLayoutWithListener />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
