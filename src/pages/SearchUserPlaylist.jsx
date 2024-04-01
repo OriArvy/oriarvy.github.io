@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import { Link } from 'react-router-dom';
 import { Suspense } from 'react';
@@ -35,6 +35,11 @@ const SearchPage = () => {
       }
 
       const data = await response.json();
+
+      if (data.items.length === 0) {
+        throw new Error('This user has no available playlists')
+      }
+
       setUserPlaylists(data.items);
       setSelectedPlaylist('');
     } catch (error) {
@@ -47,7 +52,7 @@ const SearchPage = () => {
       <div className={classes.searchContainer}>
         <h2 className={classes.searchText}>Search Spotify Playlist</h2>
         <SearchBar onSearch={handleSearch} />
-        {error && <p className='{classes.error}'>{error}</p>}
+        {error && <p className={classes.error}>{error}</p>}
       </div>
       <div className={classes.playlists}>
         {userPlaylists.map((playlist) => (
