@@ -49,14 +49,44 @@
   }
 }
 
-.correctGuess {
-  text-align: center;
-  color: #019201;
-  padding-bottom: 20px
+.correctAnswer {
+  background: #019201;
 }
 
-.incorrectGuess {
+.correctAnswer:hover {
+  background: #019201;
+  box-shadow: 0 0 12px rgba(55, 180, 6, 0.8);
+  border: 1px rgba(67, 201, 5, 0.8) solid;
+}
+
+.selectedWrongAnswer {
+  background: #be310e;
+}
+
+.selectedWrongAnswer:hover {
+  background: #be310e;
+  box-shadow: 0 0 12px rgba(242, 63, 18, 0.8);
+  border: 1px rgba(243, 58, 26, 0.8) solid;
+}
+
+.revealedAnswerText {
   text-align: center;
-  color: #be310e;
   padding-bottom: 20px;
+}
+
+.revealedAnswerTextCorrect {
+  color: #019201;
+}
+
+.revealedAnswerTextIncorrect {
+  color: #be310e;
+}
+
+.timerBar {
+  height: 30px;
+  width: 50%;
+}
+
+.mainContainer {
+  text-align: center;
 }

@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouteLoaderData } from "react-router-dom";
 import classes from './GuessSong.module.css'
+import QuestionTimer from "../components/QuestionTimer";
 
 const GuessSongPage = () => {
   const { tracks: { items: initialTracks } } = useRouteLoaderData('playlist-details');
   const [correctTrack, setCorrectTrack] = useState(null);
   const [availableAnswers, setAvailableAnswers] = useState([]);
   const [previousTracks, setPreviousTracks] = useState(new Set());
-  const [isCorrect, setIsCorrect] = useState(null);
+  const [answer, setAnswer] = useState({
+    selectedAnswer: '',
+    isCorrect: null
+  });
   const [audio, setAudio] = useState(null);
   const [error, setError] = useState('')
+  const [timerKey, setTimerKey] = useState(0);
+
+  let timer = 10000;
 
   useEffect(() => {
     return () => {
@@ -71,7 +78,11 @@ const GuessSongPage = () => {
   }
 
   function handleStartGuessing() {
-    setIsCorrect(null);
+    setTimerKey(prevKey => prevKey + 1)
+    setAnswer({
+      selectedAnswer: null,
+      isCorrect: null
+    });
 
     const newTracks = initialTracks.filter(track => !previousTracks.has(track.track.id));
 
@@ -87,9 +98,12 @@ const GuessSongPage = () => {
   }
 
   function handleAnswer(event) {
-    const answer = event.target.value;
-    const isAnswerCorrect = answer === correctTrack.track.name;
-    setIsCorrect(isAnswerCorrect);
+    const userSelection = event.target.value;
+    const isAnswerCorrect = userSelection === correctTrack.track.name;
+    setAnswer({
+      selectedAnswer: userSelection,
+      isCorrect: isAnswerCorrect
+    });
   }
 
   if (error) {
@@ -98,16 +112,26 @@ const GuessSongPage = () => {
 
   return (
     <>
-      <div>
+      <div className={classes.mainContainer}>
+        <h1>Guess current song</h1>
+        <QuestionTimer
+          key={timerKey}
+          timeout={timer}
+          onTimeout={(() => {
+            if (answer.selectedAnswer === null) {
+              setAnswer({ selectedAnswer: null, isCorrect: false });
+            }
+          })}
+          mode={classes.timerBar}
+        />
         <div className={classes.answersContainer}>
-          {availableAnswers.map((answer, index) => (
-            <button className={classes.button} key={index} onClick={handleAnswer} value={answer.track.name}>
-              {answer.track.name}
+          {availableAnswers.map((availableAnswer, index) => (
+            <button className={`${classes.button} ${answer.selectedAnswer === availableAnswer.track.name ? answer.selectedAnswer === correctTrack.track.name ?  classes.correctAnswer : classes.selectedWrongAnswer : ''}`} key={index} onClick={handleAnswer} value={availableAnswer.track.name}>
+              {availableAnswer.track.name}
             </button>
           ))}
         </div>
-        {isCorrect && <h1 className={classes.correctGuess}>Correct!</h1>}
-        {isCorrect === false && <h1 className={classes.incorrectGuess}>Incorrect!</h1>}
+        {answer.isCorrect !== null && <h1 className={`${classes.revealedAnswerText} ${answer.isCorrect ? classes.revealedAnswerTextCorrect : classes.revealedAnswerTextIncorrect}`}>Correct answer is: {correctTrack.track.name}</h1>}
       </div>
       <button className={classes.button} onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</button>
     </>
