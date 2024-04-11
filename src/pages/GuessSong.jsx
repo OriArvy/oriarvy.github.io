@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouteLoaderData } from "react-router-dom";
 import classes from './GuessSong.module.css'
 import QuestionTimer from "../components/QuestionTimer";
@@ -127,7 +127,16 @@ const GuessSongPage = () => {
         }
         <div className={classes.answersContainer}>
           {availableAnswers.map((availableAnswer, index) => (
-            <button disabled={answer.isCorrect !== null} className={`${classes.button} ${answer.selectedAnswer === availableAnswer.track.name ? classes.selectedAnswer : ''} ${answer.selectedAnswer === availableAnswer.track.name && audio === null ? answer.selectedAnswer === correctTrack.track.name ?  classes.correctAnswer : classes.selectedWrongAnswer : ''} ${audio === null && availableAnswer.track.name === correctTrack.track.name ? classes.correctAnswer : ''}`} key={index} onClick={handleAnswer} value={availableAnswer.track.name}>
+            <button
+              disabled={answer.isCorrect !== null}
+              className={`${classes.button}
+              ${answer.selectedAnswer === availableAnswer.track.name ? classes.selectedAnswer : ''}
+              ${answer.selectedAnswer === availableAnswer.track.name && audio === null ? answer.selectedAnswer === correctTrack.track.name ?  classes.correctAnswer : classes.selectedWrongAnswer : ''}
+              ${audio === null && availableAnswer.track.name === correctTrack.track.name ? classes.correctAnswer : ''}`}
+              key={index}
+              onClick={handleAnswer} 
+              value={availableAnswer.track.name}
+              >
               {availableAnswer.track.name}
             </button>
           ))}

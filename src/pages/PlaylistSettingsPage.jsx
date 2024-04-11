@@ -6,6 +6,7 @@ import buttonClasses from './Bracket.module.css'
 
 const PlaylistSettingsPage = () => {
   const [songCount, setSongCount] = useState('');
+  const [showSongCountForm, setShowSongCountForm] = useState(false)
   const navigate = useNavigate();
   const { playlistId } = useParams();
   const data = useRouteLoaderData('playlist-details')
@@ -42,6 +43,15 @@ const PlaylistSettingsPage = () => {
 
   return (
     <>
+    {!showSongCountForm &&
+    <div style={{ textAlign: 'center' }}> 
+      <h1>What would you like to play?</h1>
+      <button style={{ marginRight: '20px' }} className={buttonClasses.button} onClick={(() => setShowSongCountForm(true))}>Tournament bracket</button>
+      <button style={{ marginLeft: '20px' }} className={buttonClasses.button} onClick={handleGuessSong}>Guess the song</button>
+    </div>
+    }
+    
+    {showSongCountForm && 
       <form onSubmit={handleSubmit} className={classes.radioSection}>
         <section>
           <h2>Select number of songs:</h2>
@@ -68,7 +78,7 @@ const PlaylistSettingsPage = () => {
           <button className={buttonClasses.button+ ' ' +classes.backButton} onClick={() => navigate('/search-user-playlist')}>Back</button>
         </section>
       </form>
-      <button onClick={handleGuessSong}>Guess the song</button>
+    }
     </>
   );
 };
