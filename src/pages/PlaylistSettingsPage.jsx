@@ -15,6 +15,11 @@ const PlaylistSettingsPage = () => {
     navigate(`/playlist/${playlistId}/${songCount}`);
   };
 
+  const handleGuessSong = (e) => {
+    e.preventDefault();
+    navigate(`/playlist/${playlistId}/guess-the-song`);
+  }
+
   const handleSongCountChange = (e) => {
     setSongCount(e.target.value);
   };
@@ -36,32 +41,35 @@ const PlaylistSettingsPage = () => {
   const songOptions = generateSongLimitOptions();
 
   return (
-    <form onSubmit={handleSubmit} className={classes.radioSection}>
-      <section>
-        <h2>Select number of songs:</h2>
-        {songOptions.length >= 1 ? songOptions.map(option => (
-          <div className={classes.radioItem} key={option}>
-            <input
-                id={option}
-                type="radio"
-                name="songCount"
-                value={option}
-                checked={songCount === `${option}`}
-                onChange={handleSongCountChange}
-              />
-            <label for={option}>
-              {option} songs
-            </label>
-          </div>
-        )) : (
-          <div>
-            <h2>Error not enough songs in playlist. Make sure you have at least 4 songs in selected playlist</h2>
-          </div>
-        )}
-        {songOptions.length >= 1 && <button type="submit" className={buttonClasses.button}>Start!</button>}
-        <button className={buttonClasses.button+ ' ' +classes.backButton} onClick={() => navigate('/search-user-playlist')}>Back</button>
-      </section>
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className={classes.radioSection}>
+        <section>
+          <h2>Select number of songs:</h2>
+          {songOptions.length >= 1 ? songOptions.map(option => (
+            <div className={classes.radioItem} key={option}>
+              <input
+                  id={option}
+                  type="radio"
+                  name="songCount"
+                  value={option}
+                  checked={songCount === `${option}`}
+                  onChange={handleSongCountChange}
+                />
+              <label for={option}>
+                {option} songs
+              </label>
+            </div>
+          )) : (
+            <div>
+              <h2>Error not enough songs in playlist. Make sure you have at least 4 songs in selected playlist</h2>
+            </div>
+          )}
+          {songOptions.length >= 1 && <button type="submit" className={buttonClasses.button}>Start!</button>}
+          <button className={buttonClasses.button+ ' ' +classes.backButton} onClick={() => navigate('/search-user-playlist')}>Back</button>
+        </section>
+      </form>
+      <button onClick={handleGuessSong}>Guess the song</button>
+    </>
   );
 };
 export default PlaylistSettingsPage;

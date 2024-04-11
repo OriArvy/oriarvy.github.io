@@ -7,6 +7,7 @@ import ErrorPage from './pages/Error';
 import { loadPlaylistDetails } from './pages/PlaylistSettingsPage';
 import PlaylistSettingsPage from './pages/PlaylistSettingsPage';
 import PremadePlaylistsPage from './pages/PremadePlaylists';
+import GuessSongPage from './pages/GuessSong';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
             index: true,
             element: <PlaylistSettingsPage />
           },
-          { path: ':songCount', element: <Bracket />}
+          { path: ':songCount', element: <Bracket />},
+          { path: 'guess-the-song', element: <GuessSongPage /> }
         ]
       }
     ],
