@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouteLoaderData } from "react-router-dom";
+import classes from './GuessSong.module.css'
 
 const GuessSongPage = () => {
   const { tracks: { items: initialTracks } } = useRouteLoaderData('playlist-details');
@@ -97,14 +98,18 @@ const GuessSongPage = () => {
 
   return (
     <>
-      <button onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</button>
-      {availableAnswers.map((answer, index) => (
-        <button key={index} onClick={handleAnswer} value={answer.track.name}>
-          {answer.track.name}
-        </button>
-      ))}
-      {isCorrect && <h1>Correct!</h1>}
-      {isCorrect === false && <h1>Incorrect!</h1>}
+      <div>
+        <div className={classes.answersContainer}>
+          {availableAnswers.map((answer, index) => (
+            <button className={classes.button} key={index} onClick={handleAnswer} value={answer.track.name}>
+              {answer.track.name}
+            </button>
+          ))}
+        </div>
+        {isCorrect && <h1 className={classes.correctGuess}>Correct!</h1>}
+        {isCorrect === false && <h1 className={classes.incorrectGuess}>Incorrect!</h1>}
+      </div>
+      <button className={classes.button} onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</button>
     </>
   );
 };

@@ -1,0 +1,62 @@
+.button {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  padding: 15px 200px;
+  margin: 20px auto;
+  color: white;
+  background: linear-gradient(90deg, #2c1e19, #25200f);
+  border: 1px white solid;
+  border-radius: 20px;
+  font-family: helvetica;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background: linear-gradient(90deg, #fd4715, #f9b241);
+  box-shadow: 0 0 12px rgba(242, 100, 18, 0.8);
+  border: 1px rgba(242, 100, 18, 0.8) solid;
+}
+
+.answersContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 5%;
+  width: 50%;
+  margin: auto;
+}
+
+@media (max-width: 1660px) {
+  .answersContainer {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .answersContainer {
+    width: 85%;
+  }
+}
+
+@media (max-width: 960px) {
+  .answersContainer {
+    grid-template-columns: 1fr;
+    padding-bottom: 50px;
+  }
+}
+
+.correctGuess {
+  text-align: center;
+  color: #019201;
+  padding-bottom: 20px
+}
+
+.incorrectGuess {
+  text-align: center;
+  color: #be310e;
+  padding-bottom: 20px;
+}
