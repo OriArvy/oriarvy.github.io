@@ -114,7 +114,7 @@ const GuessSongPage = () => {
     <>
       <div className={classes.mainContainer}>
         <h1>Guess current song</h1>
-        <QuestionTimer
+        {correctTrack && <QuestionTimer
           key={timerKey}
           timeout={timer}
           onTimeout={(() => {
@@ -124,16 +124,17 @@ const GuessSongPage = () => {
           })}
           mode={classes.timerBar}
         />
+        }
         <div className={classes.answersContainer}>
           {availableAnswers.map((availableAnswer, index) => (
-            <button className={`${classes.button} ${answer.selectedAnswer === availableAnswer.track.name ? answer.selectedAnswer === correctTrack.track.name ?  classes.correctAnswer : classes.selectedWrongAnswer : ''}`} key={index} onClick={handleAnswer} value={availableAnswer.track.name}>
+            <button disabled={answer.isCorrect !== null} className={`${classes.button} ${answer.selectedAnswer === availableAnswer.track.name ? classes.selectedAnswer : ''} ${answer.selectedAnswer === availableAnswer.track.name && audio === null ? answer.selectedAnswer === correctTrack.track.name ?  classes.correctAnswer : classes.selectedWrongAnswer : ''} ${audio === null && availableAnswer.track.name === correctTrack.track.name ? classes.correctAnswer : ''}`} key={index} onClick={handleAnswer} value={availableAnswer.track.name}>
               {availableAnswer.track.name}
             </button>
           ))}
         </div>
-        {answer.isCorrect !== null && <h1 className={`${classes.revealedAnswerText} ${answer.isCorrect ? classes.revealedAnswerTextCorrect : classes.revealedAnswerTextIncorrect}`}>Correct answer is: {correctTrack.track.name}</h1>}
+        {answer.isCorrect !== null && audio === null && <h1 className={`${classes.revealedAnswerText} ${answer.isCorrect ? classes.revealedAnswerTextCorrect : classes.revealedAnswerTextIncorrect}`}>Correct answer is: {correctTrack.track.name}</h1>}
       </div>
-      <button className={classes.button} onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</button>
+      <button disabled={audio !== null} className={classes.button} onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</button>
     </>
   );
 };

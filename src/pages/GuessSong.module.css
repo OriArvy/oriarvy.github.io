@@ -49,6 +49,16 @@
   }
 }
 
+.selectedAnswer {
+  background: #adc005;
+}
+
+.selectedAnswer:hover {
+  background: #adc005;
+  box-shadow: 0 0 12px rgba(201, 238, 34, 0.8);
+  border: 1px rgba(162, 190, 1, 0.8) solid;
+}
+
 .correctAnswer {
   background: #019201;
 }
