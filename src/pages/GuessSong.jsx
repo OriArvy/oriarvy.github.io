@@ -3,6 +3,8 @@ import { useRouteLoaderData } from "react-router-dom";
 import classes from './GuessSong.module.css'
 import QuestionTimer from "../components/QuestionTimer";
 
+const MAX_CHAR_SONG_TITLE = 50
+
 const GuessSongPage = () => {
   const { tracks: { items: initialTracks } } = useRouteLoaderData('playlist-details');
   const [correctTrack, setCorrectTrack] = useState(null);
@@ -137,7 +139,7 @@ const GuessSongPage = () => {
               onClick={handleAnswer} 
               value={availableAnswer.track.name}
               >
-              {availableAnswer.track.name}
+              {availableAnswer.track.name.length > MAX_CHAR_SONG_TITLE ? availableAnswer.track.name.substring(0, 50) + '...' : availableAnswer.track.name}
             </button>
           ))}
         </div>
