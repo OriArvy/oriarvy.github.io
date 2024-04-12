@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/Home';
 import SearchUserPlaylistLayout from './pages/SearchUserPlaylist';
 import Bracket from './pages/Bracket';
@@ -42,16 +42,6 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const path = urlParams.get('path');
-    if (path) {
-      navigate(path);
-    }
-  }, [navigate]);
-  
   return (
       <RouterProvider router={router} />
   )
