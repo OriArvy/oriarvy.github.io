@@ -21,6 +21,7 @@ const BracketPage = () => {
       setError('Playlist must have at least 4 items.');
       return;
     }
+    console.log('im in useefect')
     try {
       const shuffledTeams = shuffleAndLimitPlaylistItems([...initialTeams], songCount);
       setTeams(shuffledTeams);
@@ -31,6 +32,7 @@ const BracketPage = () => {
 
   useEffect(() => {
     setMatchups(createMatchups(teams));
+    console.log('im in useefect for creating matchups')
   }, [teams]);
 
   const shuffleAndLimitPlaylistItems = (tracks, limit) => {

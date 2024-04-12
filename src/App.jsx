@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, useHistory } from 'react-router-dom';
 import HomePage from './pages/Home';
 import SearchUserPlaylistLayout from './pages/SearchUserPlaylist';
 import Bracket from './pages/Bracket';
@@ -42,6 +42,16 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const history = useHistory()
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const path = urlParams.get('path');
+    if (path) {
+        history.push(path);
+    }
+  }, [history]);
+  
   return (
       <RouterProvider router={router} />
   )

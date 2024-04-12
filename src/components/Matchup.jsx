@@ -1,10 +1,9 @@
-// Matchup.js
 import React, { useState } from 'react';
 import classes from './Matchup.module.css'
 
 const Matchup = ({ teams, onWinnerSelect }) => {
+  console.log('im in matchup')
   const [selectedWinner, setSelectedWinner] = useState(null);
-  console.log(teams)
 
   const handleWinnerSelect = (team) => {
     setSelectedWinner(team);
