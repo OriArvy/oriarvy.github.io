@@ -1,8 +1,9 @@
 import classes from './PlaylistItem.module.css'
+import { motion } from 'framer-motion'
 
 export default function PlaylistItem({name, totalTracks, image, selectedPlaylistId, id}) {
   return (
-    <div className={selectedPlaylistId === id ? `${classes.playlistCard} ${classes.active}` : `${classes.playlistCard}`}>
+    <motion.div  whileHover={{ scale: 1.1 }} className={selectedPlaylistId === id ? `${classes.playlistCard} ${classes.active}` : `${classes.playlistCard}`}>
       <li className={classes.content}>
         <h3 className={classes.title}>
           {name}
@@ -12,6 +13,6 @@ export default function PlaylistItem({name, totalTracks, image, selectedPlaylist
           Songs: {totalTracks}
         </p>
       </li>
-    </div>
+    </motion.div>
   )
 }

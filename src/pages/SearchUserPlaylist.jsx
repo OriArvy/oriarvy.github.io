@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import useSpotifyAccessToken from '../hooks/useSpotifyAcessToken';
 import PlaylistItem from '../components/PlaylistItem';
 import classes from './SearchUserPlaylist.module.css';
+import { motion, stagger } from 'framer-motion';
 
 const SearchPage = () => {
   const accessToken = useSpotifyAccessToken();
@@ -62,15 +63,26 @@ const SearchPage = () => {
   };
 
   return (
+    <motion.div
+      initial={{ y: -25, opacity: 0}}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        ease: "linear",
+        duration: 0.5
+      }}>
     <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
       <div className={classes.searchContainer}>
         <h2 className={classes.searchText}>Search Spotify Playlist</h2>
         <SearchBar onSearch={handleSearch} />
         {error && <p className={classes.error}>{error}</p>}
       </div>
-      <div className={classes.playlists}>
-        {userPlaylists.map((playlist) => (
-          <div onClick={() => setSelectedPlaylist(playlist)} key={playlist.id}>
+      <ul className={classes.playlists}>
+        {userPlaylists.map((playlist, i) => (
+          <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.15, delay: i * 0.15 }}
+           onClick={() => setSelectedPlaylist(playlist)} key={playlist.id}>
             <PlaylistItem
               selectedPlaylistId={selectedPlaylist.id}
               id={playlist.id}
@@ -78,18 +90,19 @@ const SearchPage = () => {
               totalTracks={playlist.tracks.total}
               image={playlist.images[0]?.url || 'defaultPlaylistImageURL'}
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </ul>
       {selectedPlaylist && (
         <div className={classes.confirmation}>
           <h1 className={classes.confirmationText}>Confirm selected playlist: {selectedPlaylist.name}</h1>
           <Link to={`/playlist/${selectedPlaylist.id}`}>
-            <button className={classes.button}>Confirm</button>
+            <motion.button whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 500 }} className={classes.button}>Confirm</motion.button>
           </Link>
         </div>
       )}
     </Suspense>
+    </motion.div>
   );
 };
 

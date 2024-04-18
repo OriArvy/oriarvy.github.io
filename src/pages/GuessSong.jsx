@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouteLoaderData } from "react-router-dom";
 import classes from './GuessSong.module.css'
 import QuestionTimer from "../components/QuestionTimer";
+import { motion } from "framer-motion";
 
 const MAX_CHAR_SONG_TITLE = 50
 
@@ -19,6 +20,10 @@ const GuessSongPage = () => {
   const [timerKey, setTimerKey] = useState(0);
 
   let timer = 10000;
+  const isFirefox = typeof InstallTrigger !== 'undefined';
+  if (isFirefox) {
+    timer = 8000;
+  }
 
   useEffect(() => {
     return () => {
@@ -113,7 +118,14 @@ const GuessSongPage = () => {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ y: -25, opacity: 0}}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        ease: "linear",
+        duration: 0.5
+      }}
+    >
       <div className={classes.mainContainer}>
         <h1>Guess current song</h1>
         {correctTrack && <QuestionTimer
@@ -145,8 +157,8 @@ const GuessSongPage = () => {
         </div>
         {answer.isCorrect !== null && audio === null && <h1 className={`${classes.revealedAnswerText} ${answer.isCorrect ? classes.revealedAnswerTextCorrect : classes.revealedAnswerTextIncorrect}`}>Correct answer is: {correctTrack.track.name}</h1>}
       </div>
-      <button disabled={audio !== null} className={classes.button} onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</button>
-    </>
+      <motion.button whileHover={{ scale: 1.1 }} disabled={audio !== null} className={classes.button} onClick={handleStartGuessing}>{correctTrack ? "Next!" : "Start!"}</motion.button>
+    </motion.div>
   );
 };
 

@@ -3,6 +3,7 @@ import { useNavigate, useParams, useRouteLoaderData } from 'react-router-dom';
 import { fetchSpotifyAccessToken } from '../hooks/spotifyAuth'
 import classes from './PlaylistSettingsPage.module.css'
 import buttonClasses from './Bracket.module.css'
+import { motion } from 'framer-motion';
 
 const PlaylistSettingsPage = () => {
   const [songCount, setSongCount] = useState('');
@@ -46,8 +47,8 @@ const PlaylistSettingsPage = () => {
     {!showSongCountForm &&
     <div style={{ textAlign: 'center' }}> 
       <h1>What would you like to play?</h1>
-      <button style={{ marginRight: '20px' }} className={buttonClasses.button} onClick={(() => setShowSongCountForm(true))}>Tournament bracket</button>
-      <button style={{ marginLeft: '20px' }} className={buttonClasses.button} onClick={handleGuessSong}>Guess the song</button>
+      <motion.button whileHover={{ scale: 1.1 }} style={{ marginRight: '20px' }} className={buttonClasses.button} onClick={(() => setShowSongCountForm(true))}>Tournament bracket</motion.button>
+      <motion.button whileHover={{ scale: 1.1 }} style={{ marginLeft: '20px' }} className={buttonClasses.button} onClick={handleGuessSong}>Guess the song</motion.button>
     </div>
     }
     
