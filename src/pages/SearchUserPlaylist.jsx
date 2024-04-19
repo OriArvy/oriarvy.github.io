@@ -35,7 +35,7 @@ const SearchPage = () => {
 
     try {
       const response = await fetch(
-        `https://api.spotify.com/v1/users/${searchTerm}/playlists?limit=50`,
+        `https://api.spotify.com/v1/users/${searchTerm.toLowerCase()}/playlists?limit=50`,
         {
           method: 'GET',
           headers: {
