@@ -1,7 +1,5 @@
 .playlists {
-  display: flex;
   padding: 2rem;
-  flex-wrap: wrap;
 }
 
 .button {
@@ -26,10 +24,11 @@
 .confirmation {
   text-align: center;
   width: 100%;
+  line-height: 40px;
 }
 
 .searchText {
-  padding-left: 20px;
+  text-align: center;
 }
 
 .searchContainer {
@@ -45,4 +44,18 @@
 .error {
   text-align: center;
   font-size: 24px;
+}
+
+@media only screen and (max-width: 400px) {
+  .searchContainer {
+    text-align: center;
+  }
+}
+
+
+@media only screen and (min-width: 660px) {
+  .playlists {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

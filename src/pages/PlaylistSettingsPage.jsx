@@ -49,20 +49,18 @@ const PlaylistSettingsPage = () => {
   return (
     <>
       {!showSongCountForm && (
-        <div style={{ textAlign: 'center' }}>
+        <div className={classes.buttonContainer}>
           <h1>What would you like to play?</h1>
           <motion.button
             whileHover={{ scale: 1.1 }}
-            style={{ marginRight: '20px' }}
-            className={buttonClasses.button}
+            className={`${buttonClasses.button} ${classes.rightMargin}`}
             onClick={() => setShowSongCountForm(true)}
           >
             Tournament bracket
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
-            style={{ marginLeft: '20px' }}
-            className={buttonClasses.button}
+            className={`${buttonClasses.button} ${classes.leftMargin}`}
             onClick={handleGuessSong}
           >
             Guess the song

@@ -11,7 +11,7 @@ const SearchBar = ({ onSearch }) => {
   }
 
   return (
-    <form onSubmit={handleSearch}>
+    <form className={classes.searchForm} onSubmit={handleSearch}>
       <input
         className={classes.searchInput}
         placeholder='Enter Spotify username'

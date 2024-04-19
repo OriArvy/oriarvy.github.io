@@ -44,6 +44,7 @@
 
 @media (max-width: 960px) {
   .answersContainer {
+    width: 100%;
     grid-template-columns: 1fr;
     padding-bottom: 50px;
   }
@@ -82,6 +83,7 @@
 .revealedAnswerText {
   text-align: center;
   padding-bottom: 20px;
+  line-height: 40px;
 }
 
 .revealedAnswerTextCorrect {

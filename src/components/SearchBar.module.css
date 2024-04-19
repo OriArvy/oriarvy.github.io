@@ -17,7 +17,8 @@
 
 .searchIcon {
   position: relative;
-  left: -66px;
+  left: 245px;
+  top: -53px;
   padding: 16px 20px;
   background: transparent;
   border: none;
@@ -32,4 +33,15 @@
   bottom: 10px;
   height: 30px;
   border-left: 1px solid #aeaba7;
+}
+
+.searchForm {
+  max-width: 318px;
+}
+
+@media only screen and (max-width: 400px) {
+  .searchIcon {
+    left: 114px;
+    top: -53px;
+  }
 }
