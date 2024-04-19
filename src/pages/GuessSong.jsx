@@ -120,7 +120,7 @@ const GuessSongPage = () => {
   }
 
   if (error) {
-    return <div>{error}</div>
+    return <div className={classes.error}>{error}</div>
   }
 
   return (

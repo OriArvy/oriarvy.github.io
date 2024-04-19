@@ -2,8 +2,9 @@ import { useState } from 'react'
 import classes from './Matchup.module.css'
 import { motion } from 'framer-motion'
 
+const MAX_TRACK_LENGTH = 40
+
 const Matchup = ({ teams, onWinnerSelect }) => {
-  console.log('im in matchup')
   const [selectedWinner, setSelectedWinner] = useState(null)
 
   const handleWinnerSelect = team => {
@@ -12,6 +13,10 @@ const Matchup = ({ teams, onWinnerSelect }) => {
 
   const confirmWinner = () => {
     onWinnerSelect(selectedWinner)
+  }
+
+  const limitTrackLength = (track) => {
+    return track.length > MAX_TRACK_LENGTH ? track.substring(0, 40) + '...' : track
   }
 
   return (
@@ -38,7 +43,7 @@ const Matchup = ({ teams, onWinnerSelect }) => {
             src={`https://open.spotify.com/embed/track/${teams[0].track.id}?utm_source=oembed`}
           ></iframe>
           <p>
-            {teams[0].track.artists[0].name} - {teams[0].track.name}
+            {teams[0].track.artists[0].name} - {limitTrackLength(teams[0].track.name)}
           </p>
         </motion.div>
         <motion.div

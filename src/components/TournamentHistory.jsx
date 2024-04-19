@@ -1,6 +1,8 @@
 import classes from './TournamentHistory.module.css'
 import { motion } from 'framer-motion';
 
+const MAX_TRACK_LENGTH = 40
+
 const TournamentHistory = ({ tournamentHistory }) => {
   const calculateCumulativeDelay = (currentRoundIndex) => {
     let delay = 0;
@@ -9,6 +11,10 @@ const TournamentHistory = ({ tournamentHistory }) => {
     }
     return delay;
   };
+
+  const limitTrackLength = (track) => {
+    return track.length > MAX_TRACK_LENGTH ? track.substring(0, 40) + '...' : track
+  }
 
   return (
     <div className="tournament-history">
@@ -19,16 +25,16 @@ const TournamentHistory = ({ tournamentHistory }) => {
            key={roundIndex} className={classes.roundContainer}>
             {round.matchups.map((matchup, matchupIndex) => (
               <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: calculateCumulativeDelay(roundIndex) + matchupIndex * 0.5 }}
-              key={matchupIndex}
-              className={classes.matchup}>
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: calculateCumulativeDelay(roundIndex) + matchupIndex * 0.5 }}
+                key={matchupIndex}
+                className={classes.matchup}>
                 <p>
-                  {matchup.teams[0].track.artists[0].name} - {matchup.teams[0].track.name}
+                  {matchup.teams[0].track.artists[0].name} - {limitTrackLength(matchup.teams[0].track.name)}
                 </p>
                 <p>
-                {matchup.teams[1].track.artists[0].name} - {matchup.teams[1].track.name}
+                  {matchup.teams[1].track.artists[0].name} - {limitTrackLength(matchup.teams[1].track.name)}
                 </p>
               </motion.div>
             ))}
