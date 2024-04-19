@@ -1,14 +1,14 @@
-import { useLocation,  } from "react-router-dom";
-import { useEffect } from "react";
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function RouteChangeListener() {
   const location = useLocation()
 
   useEffect(() => {
     localStorage.removeItem('playlists')
-  }, [location]);
+  }, [location])
 
-  return null;
+  return null
 }
 
 export default RouteChangeListener

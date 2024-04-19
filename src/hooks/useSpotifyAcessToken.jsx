@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react';
-import { fetchSpotifyAccessToken } from './spotifyAuth'; // Adjust the path as necessary
+import { useState, useEffect } from 'react'
+import { fetchSpotifyAccessToken } from './spotifyAuth'
 
 const useSpotifyAccessToken = () => {
-  const [accessToken, setAccessToken] = useState('');
+  const [accessToken, setAccessToken] = useState('')
 
   useEffect(() => {
     const getToken = async () => {
-      const token = await fetchSpotifyAccessToken();
-      setAccessToken(token);
-    };
+      const token = await fetchSpotifyAccessToken()
+      setAccessToken(token)
+    }
 
-    getToken();
-  }, []);
+    getToken()
+  }, [])
 
-  return accessToken;
-};
+  return accessToken
+}
 
-export default useSpotifyAccessToken;
+export default useSpotifyAccessToken

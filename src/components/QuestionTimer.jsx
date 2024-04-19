@@ -1,38 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 export default function QuestionTimer({ timeout, onTimeout, mode }) {
-  const [remainingTime, setRemainingTime] = useState(timeout);
+  const [remainingTime, setRemainingTime] = useState(timeout)
 
   useEffect(() => {
-    const timer = setTimeout(onTimeout, timeout);
+    const timer = setTimeout(onTimeout, timeout)
 
     return () => {
-      clearTimeout(timer);
-    };
-  }, [timeout, onTimeout]);
+      clearTimeout(timer)
+    }
+  }, [timeout, onTimeout])
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRemainingTime(prevRemainingTime => {
         if (prevRemainingTime <= 0) {
-          clearInterval(interval);
-          return prevRemainingTime;
+          clearInterval(interval)
+          return prevRemainingTime
         }
-        return prevRemainingTime - 25;
-      });
-    }, 25);
+        return prevRemainingTime - 25
+      })
+    }, 25)
 
     return () => {
-      clearInterval(interval); 
-    };
-  }, []);
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
     <progress
-      id="question-time"
+      id='question-time'
       max={timeout}
       value={remainingTime}
       className={mode}
     />
-  );
+  )
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import classes from './TournamentHistory.module.css'
 import { motion } from 'framer-motion';
 
@@ -23,7 +22,8 @@ const TournamentHistory = ({ tournamentHistory }) => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: calculateCumulativeDelay(roundIndex) + matchupIndex * 0.5 }}
-              key={matchupIndex} className={classes.matchup}>
+              key={matchupIndex}
+              className={classes.matchup}>
                 <p>
                   {matchup.teams[0].track.artists[0].name} - {matchup.teams[0].track.name}
                 </p>

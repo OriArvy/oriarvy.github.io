@@ -26,10 +26,10 @@
 }
 
 .searchIcon:before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 10px;
-  height: 30px;  /* or 100px */
-  border-left:1px solid #aeaba7;
+  height: 30px;
+  border-left: 1px solid #aeaba7;
 }

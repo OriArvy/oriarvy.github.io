@@ -1,5 +1,5 @@
-import RouteChangeListener from "../components/RouteChangeListener"
-import RootLayout from "./Root"
+import RouteChangeListener from '../components/RouteChangeListener'
+import RootLayout from './Root'
 
 function RootLayoutWithListener() {
   return (

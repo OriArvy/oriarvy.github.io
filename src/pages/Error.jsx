@@ -1,9 +1,9 @@
-import MainNavigation from '../components/MainNavigation';
+import MainNavigation from '../components/MainNavigation'
 import PageContent from '../components/PageContent'
 import { useRouteError } from 'react-router-dom'
 
 function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError()
 
   let title = 'An error occured'
   let message = 'Something went wrong'
