@@ -49,7 +49,14 @@ const PlaylistSettingsPage = () => {
   return (
     <>
       {!showSongCountForm && (
-        <div className={classes.buttonContainer}>
+        <motion.div
+          className={classes.buttonContainer}
+          initial={{ y: -25, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            ease: 'linear',
+            duration: 0.5}} 
+        >
           <h1>What would you like to play?</h1>
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -65,7 +72,7 @@ const PlaylistSettingsPage = () => {
           >
             Guess the song
           </motion.button>
-        </div>
+        </motion.div>
       )}
 
       {showSongCountForm && (

@@ -1,9 +1,10 @@
 import usePremadePlaylists from '../hooks/usePremadePlaylists'
 import PlaylistItem from '../components/PlaylistItem'
 import { useState, useMemo } from 'react'
-import { Link } from 'react-router-dom'
 import classes from './SearchUserPlaylist.module.css'
 import { motion } from 'framer-motion'
+import Modal from '../components/Modal'
+import ConfirmationButton from '../components/ConfirmationButton'
 
 const PremadePlaylistsPage = () => {
   const playlistIds = useMemo(
@@ -23,6 +24,7 @@ const PremadePlaylistsPage = () => {
   )
   const [selectedPlaylist, setSelectedPlaylist] = useState('')
   const { playlists, loading, error } = usePremadePlaylists(playlistIds)
+  const [modal, setModal] = useState(false)
 
   if (loading) return <div className={classes.loading}>Loading...</div>
   if (error) return <div>Error: {error}</div>
@@ -36,7 +38,7 @@ const PremadePlaylistsPage = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.15, delay: index * 0.15 }}
-            onClick={() => setSelectedPlaylist(playlist)}
+            onClick={() => {setSelectedPlaylist(playlist), setModal(true)}}
           >
             <PlaylistItem
               selectedPlaylistId={selectedPlaylist.id}
@@ -48,14 +50,14 @@ const PremadePlaylistsPage = () => {
           </motion.div>
         </div>
       ))}
+      {modal &&
+        <Modal isOpen={modal} onClose={() => setModal(false)}>
+          <ConfirmationButton playlist={selectedPlaylist} />
+        </Modal>
+      }
       {selectedPlaylist && (
         <div className={classes.confirmation}>
-          <h1 className={classes.confirmationText}>
-            Confirm selected playlist: {selectedPlaylist.name}
-          </h1>
-          <Link to={`/playlist/${selectedPlaylist.id}`}>
-            <button className={classes.button}>Confirm</button>
-          </Link>
+          <ConfirmationButton playlist={selectedPlaylist} />
         </div>
       )}
     </div>

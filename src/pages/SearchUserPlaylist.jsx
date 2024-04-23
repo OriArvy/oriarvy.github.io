@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import SearchBar from '../components/SearchBar'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { Suspense } from 'react'
 import useSpotifyAccessToken from '../hooks/useSpotifyAcessToken'
 import PlaylistItem from '../components/PlaylistItem'
 import classes from './SearchUserPlaylist.module.css'
 import { motion } from 'framer-motion'
+import Modal from '../components/Modal'
+import ConfirmationButton from '../components/ConfirmationButton'
 
 const SearchPage = () => {
   const accessToken = useSpotifyAccessToken()
@@ -13,6 +15,7 @@ const SearchPage = () => {
   const [selectedPlaylist, setSelectedPlaylist] = useState('')
   const [error, setError] = useState(null)
   const [search, setSearch] = useSearchParams()
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     const storedPlaylists = localStorage.getItem('playlists')
@@ -86,7 +89,7 @@ const SearchPage = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.15, delay: i * 0.15 }}
-              onClick={() => setSelectedPlaylist(playlist)}
+              onClick={() => {setSelectedPlaylist(playlist), setModal(true)}}
               key={playlist.id}
             >
               <PlaylistItem
@@ -99,20 +102,14 @@ const SearchPage = () => {
             </motion.div>
           ))}
         </ul>
+        {modal &&
+          <Modal isOpen={modal} onClose={() => setModal(false)}>
+            <ConfirmationButton playlist={selectedPlaylist} />
+          </Modal>
+        }
         {selectedPlaylist && (
           <div className={classes.confirmation}>
-            <h1 className={classes.confirmationText}>
-              Confirm selected playlist: {selectedPlaylist.name}
-            </h1>
-            <Link to={`/playlist/${selectedPlaylist.id}`}>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: 'spring', stiffness: 500 }}
-                className={classes.button}
-              >
-                Confirm
-              </motion.button>
-            </Link>
+            <ConfirmationButton playlist={selectedPlaylist} />
           </div>
         )}
       </Suspense>

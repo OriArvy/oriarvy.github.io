@@ -1,0 +1,54 @@
+.modal, .modalOverlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.modalOverlay {
+  background: #1e1e1e;
+  opacity: .9;
+}
+.modalContent {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 40px;
+  padding: 14px 28px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.modalClose {
+  position: absolute;
+  margin-right: 20px;
+  right: 10px;
+  bottom: 14px;
+}
+
+.cancelButton {
+  padding: 15px 90px;
+  margin: 0 auto;
+  color: white;
+  background: #D50032;
+  border: 1px white solid;
+  border-radius: 20px;
+  font-family: helvetica;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+@media (max-width: 1080px) {
+  .modalClose {
+    left: 28px;
+    bottom: -45px;
+  }
+  .modalContent {
+    text-align: center;
+  }
+}
