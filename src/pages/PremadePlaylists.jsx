@@ -26,7 +26,7 @@ const PremadePlaylistsPage = () => {
   const { playlists, loading, error } = usePremadePlaylists(playlistIds)
   const [modal, setModal] = useState(false)
 
-  if (loading) return <div className={classes.loading}>Loading...</div>
+  if (loading) return (<div className={classes.loading}><div className={classes.spinner}></div></div>)
   if (error) return <div>Error: {error}</div>
 
   return (

@@ -77,7 +77,7 @@ const SearchPage = () => {
         duration: 0.5,
       }}
     >
-      <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+      <Suspense fallback={<div className={classes.loading}><div className={classes.spinner}></div></div>}>
         <div className={classes.searchContainer}>
           <h2 className={classes.searchText}>Search Spotify Playlist</h2>
           <SearchBar onSearch={handleSearch} />
